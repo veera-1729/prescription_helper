@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_function_declarations_over_variables, avoid_print
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -8,30 +10,32 @@ import 'package:prescription_helper/screens/userProfileScreen.dart';
 import 'package:prescription_helper/utility/appColors.dart';
 import 'package:prescription_helper/utility/appDimens.dart';
 import 'package:prescription_helper/utility/utility.dart';
+import '../api_request/logincontroller.dart';
 
 class VerificationScreen extends StatefulWidget {
   String? countrycode;
   String? mobile;
-  VerificationScreen({@required this.mobile, @required this.countrycode});
+  String? username;
+  VerificationScreen({@required this.mobile,@required this.username, @required this.countrycode});
   @override
   _VerificationScreenPageState createState() => _VerificationScreenPageState();
 }
 
 class _VerificationScreenPageState extends State<VerificationScreen> {
-  TextEditingController controller1 = new TextEditingController();
-  TextEditingController controller2 = new TextEditingController();
-  TextEditingController controller3 = new TextEditingController();
-  TextEditingController controller4 = new TextEditingController();
-  TextEditingController controller5 = new TextEditingController();
-  TextEditingController controller6 = new TextEditingController();
-  FocusNode controller1fn = new FocusNode();
-  FocusNode controller2fn = new FocusNode();
-  FocusNode controller3fn = new FocusNode();
-  FocusNode controller4fn = new FocusNode();
-  FocusNode controller5fn = new FocusNode();
-  FocusNode controller6fn = new FocusNode();
+  TextEditingController controller1 = TextEditingController();
+  TextEditingController controller2 = TextEditingController();
+  TextEditingController controller3 = TextEditingController();
+  TextEditingController controller4 = TextEditingController();
+  TextEditingController controller5 = TextEditingController();
+  TextEditingController controller6 = TextEditingController();
+  FocusNode controller1fn = FocusNode();
+  FocusNode controller2fn = FocusNode();
+  FocusNode controller3fn = FocusNode();
+  FocusNode controller4fn = FocusNode();
+  FocusNode controller5fn = FocusNode();
+  FocusNode controller6fn = FocusNode();
   static const double dist = 3.0;
-  TextEditingController currController = new TextEditingController();
+  TextEditingController currController = TextEditingController();
   String otp = "";
   late AppDimens appDimens;
   bool isLoading = false;
@@ -127,6 +131,7 @@ class _VerificationScreenPageState extends State<VerificationScreen> {
         _showProgressDialog(false);
         if (user != null) {
           userdata.write("isLoggedIn", "Yes");
+          createUser(widget.username!, widget.mobile!, userdata.read("firebase_token"));
           print(user);
           Get.to(UserProfileScreen(user: user));
         } else {
@@ -168,7 +173,7 @@ class _VerificationScreenPageState extends State<VerificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    appDimens = new AppDimens(MediaQuery.of(context).size);
+    appDimens = AppDimens(MediaQuery.of(context).size);
 
     List<Widget> widgetList = [
       Padding(
@@ -198,9 +203,9 @@ class _VerificationScreenPageState extends State<VerificationScreen> {
       ),
       Padding(
         padding: const EdgeInsets.only(right: dist, left: dist),
-        child: new Container(
+        child: Container(
           alignment: Alignment.center,
-          child: new TextField(
+          child: TextField(
             textInputAction: TextInputAction.next,
             keyboardType: TextInputType.number,
             onChanged: (ct) {
@@ -224,9 +229,9 @@ class _VerificationScreenPageState extends State<VerificationScreen> {
       ),
       Padding(
         padding: const EdgeInsets.only(right: dist, left: dist),
-        child: new Container(
+        child: Container(
           alignment: Alignment.center,
-          child: new TextField(
+          child: TextField(
             onChanged: (ct) {
               if (ct.length > 0) {
                 _fieldFocusChange(context, controller3fn, controller4fn);
@@ -250,9 +255,9 @@ class _VerificationScreenPageState extends State<VerificationScreen> {
       ),
       Padding(
         padding: const EdgeInsets.only(right: dist, left: dist),
-        child: new Container(
+        child: Container(
           alignment: Alignment.center,
-          child: new TextField(
+          child: TextField(
             onChanged: (ct) {
               if (ct.length > 0) {
                 _fieldFocusChange(context, controller4fn, controller5fn);
@@ -276,9 +281,9 @@ class _VerificationScreenPageState extends State<VerificationScreen> {
       ),
       Padding(
         padding: const EdgeInsets.only(right: dist, left: dist),
-        child: new Container(
+        child: Container(
           alignment: Alignment.center,
-          child: new TextField(
+          child: TextField(
             onChanged: (ct) {
               if (ct.length > 0) {
                 _fieldFocusChange(context, controller5fn, controller6fn);
@@ -302,9 +307,9 @@ class _VerificationScreenPageState extends State<VerificationScreen> {
       ),
       Padding(
         padding: const EdgeInsets.only(right: dist, left: dist),
-        child: new Container(
+        child: Container(
           alignment: Alignment.center,
-          child: new TextField(
+          child: TextField(
             onChanged: (ct) {
               if (ct.length == 0) {
                 _fieldFocusChange(context, controller6fn, controller5fn);

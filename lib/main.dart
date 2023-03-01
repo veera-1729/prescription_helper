@@ -8,13 +8,14 @@ import 'package:prescription_helper/screens/loginWithPhone.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 
-
 void main() async {
   await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
   //most important thing is to initialise firebase in project
   await Firebase.initializeApp();
-  FirebaseMessaging.instance.getToken().then((value){
+  final userdata = GetStorage();
+  FirebaseMessaging.instance.getToken().then((value) {
+    userdata.write("firebase_token", value);
     print("Get token $value");
   });
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
@@ -38,10 +39,9 @@ class _MyAppState extends State<MyApp> {
         FocusScope.of(context).requestFocus(new FocusNode());
       },
       child: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: LoginWithPhone()
-        //home: Navigation(),
-      ),
+          debugShowCheckedModeBanner: false, home: LoginWithPhone()
+          //home: Navigation(),
+          ),
     );
   }
 }
