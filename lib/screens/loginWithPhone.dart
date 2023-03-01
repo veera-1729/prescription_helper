@@ -256,6 +256,6 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
   continueClick() {
     FocusScope.of(context).requestFocus(new FocusNode());
     Get.to(VerificationScreen(
-        mobile: textEditingController.text,username:usernamecontroller.text.trim(), countrycode: "+91"));
+        mobile: textEditingController.text,username:usernamecontroller.text.trim(), countrycode: "+91",isAdmin:isAdmin));
   }
 }

@@ -6,17 +6,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+
 import 'package:prescription_helper/screens/userProfileScreen.dart';
 import 'package:prescription_helper/utility/appColors.dart';
 import 'package:prescription_helper/utility/appDimens.dart';
 import 'package:prescription_helper/utility/utility.dart';
+
 import '../api_request/logincontroller.dart';
 
 class VerificationScreen extends StatefulWidget {
   String? countrycode;
   String? mobile;
   String? username;
-  VerificationScreen({@required this.mobile,@required this.username, @required this.countrycode});
+  bool? isAdmin;
+  VerificationScreen({
+    Key? key,
+    this.countrycode,
+    this.mobile,
+    this.username,
+    this.isAdmin,
+  }) : super(key: key);
   @override
   _VerificationScreenPageState createState() => _VerificationScreenPageState();
 }
@@ -131,8 +140,8 @@ class _VerificationScreenPageState extends State<VerificationScreen> {
         _showProgressDialog(false);
         if (user != null) {
           userdata.write("isLoggedIn", "Yes");
-          createUser(widget.username!, widget.mobile!, userdata.read("firebase_token"));
-          print(user);
+          await createUser(widget.username!, widget.mobile!, userdata.read("firebase_token"),widget.isAdmin!);
+          //print(user);
           Get.to(UserProfileScreen(user: user));
         } else {
           Utility.showToast(msg: "Sign in failed");
