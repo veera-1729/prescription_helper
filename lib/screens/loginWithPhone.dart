@@ -13,6 +13,7 @@ class LoginWithPhone extends StatefulWidget {
 }
 
 class _LoginWithPhoneState extends State<LoginWithPhone> {
+  bool isAdmin = false;
   late AppDimens appDimens;
   late TextEditingController textEditingController;
   late Size size;
@@ -66,6 +67,22 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
                     SizedBox(
                       height: appDimens.paddingw20,
                     ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Checkbox(
+                          value: isAdmin,
+                          onChanged: (value) {
+                            setState(() {
+                              isAdmin = value!;
+                              print(isAdmin);
+                            });
+                          },
+                        ),
+                        Text("Login as Admin",style: TextStyle(fontWeight: FontWeight.w900),)
+                      ],
+                    ),
+                    SizedBox(height: 20,),
                     Utility.loginButtonsWidget(
                       "",
                       "Continue",

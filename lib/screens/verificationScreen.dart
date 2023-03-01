@@ -128,14 +128,6 @@ class _VerificationScreenPageState extends State<VerificationScreen> {
         if (user != null) {
           userdata.write("isLoggedIn", "Yes");
           print(user);
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => UserProfileScreen(
-          //       user: user,
-          //     ),
-          //   ),
-          // );
           Get.to(UserProfileScreen(user: user));
         } else {
           Utility.showToast(msg: "Sign in failed");

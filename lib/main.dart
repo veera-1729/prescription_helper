@@ -39,8 +39,8 @@ class _MyAppState extends State<MyApp> {
       },
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        //home: userData.read("isLoggedIn")??  LoginWithPhone() ,
-        home: Navigation(),
+        home: LoginWithPhone()
+        //home: Navigation(),
       ),
     );
   }
