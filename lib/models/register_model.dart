@@ -1,26 +1,37 @@
+// To parse this JSON data, do
+//
+//     final user = userFromJson(jsonString);
+
 import 'dart:convert';
 
-RegisterModal registerModalFromJson(String str) =>
-    RegisterModal.fromJson(json.decode(str));
+UserModel userFromJson(String str) => UserModel.fromJson(json.decode(str));
 
-String registerModalToJson(RegisterModal data) => json.encode(data.toJson());
+String userToJson(UserModel data) => json.encode(data.toJson());
 
-class RegisterModal {
-  RegisterModal(
-      {required this.firstName, required this.phone, required this.countryCode
-      });
+class UserModel {
+    UserModel({
+        required this.id,
+        required this.username,
+        required this.phoneNo,
+        required this.isAdmin,
+    });
 
-  String firstName;
-  String phone;
-  String countryCode;
+    String id;
+    String username;
+    String phoneNo;
+    String isAdmin;
 
-  factory RegisterModal.fromJson(Map<String, dynamic> json) => RegisterModal(
-      firstName: json["firstName"], phone: json["phone"], countryCode: json["countryCode"]
-      );
+    factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+        id: json["_id"],
+        username: json["username"],
+        phoneNo: json["phone_no"],
+        isAdmin: json["isAdmin"],
+    );
 
-  Map<String, dynamic> toJson() => {
-        "firstName": firstName,
-        "phone": phone,
-        "countryCode": countryCode,
-      };
+    Map<String, dynamic> toJson() => {
+        "_id": id,
+        "username": username,
+        "phone_no": phoneNo,
+        "isAdmin": isAdmin,
+    };
 }

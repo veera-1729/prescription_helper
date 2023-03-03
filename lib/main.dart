@@ -39,8 +39,8 @@ class _MyAppState extends State<MyApp> {
         FocusScope.of(context).requestFocus(new FocusNode());
       },
       child: GetMaterialApp(
-          debugShowCheckedModeBanner: false, home: LoginWithPhone()
-          //home: Navigation(),
+          debugShowCheckedModeBanner: false, //home: ImageUploader()
+          home: Navigation(),
           ),
     );
   }

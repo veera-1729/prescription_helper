@@ -13,6 +13,7 @@ class LoginWithPhone extends StatefulWidget {
 }
 
 class _LoginWithPhoneState extends State<LoginWithPhone> {
+  final userData = GetStorage();
   TextEditingController usernamecontroller = new TextEditingController();
   bool isAdmin = false;
   late AppDimens appDimens;
@@ -77,6 +78,7 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
                           onChanged: (value) {
                             setState(() {
                               isAdmin = value!;
+                              //userData.write("isAdmin", isAdmin);
                               print(isAdmin);
                             });
                           },
@@ -234,7 +236,6 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
           ),
           Expanded(
             child: TextFormField(
-            
               style: TextStyle(
                   fontSize: appDimens.text16, color: AppColors.greyText),
               controller: usernamecontroller,
@@ -255,7 +256,12 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
 
   continueClick() {
     FocusScope.of(context).requestFocus(new FocusNode());
+    userData.write("username", usernamecontroller.text.trim());
+
     Get.to(VerificationScreen(
-        mobile: textEditingController.text,username:usernamecontroller.text.trim(), countrycode: "+91",isAdmin:isAdmin));
+        mobile: textEditingController.text,
+        username: usernamecontroller.text.trim(),
+        countrycode: "+91",
+        isAdmin: isAdmin));
   }
 }

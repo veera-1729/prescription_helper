@@ -7,12 +7,14 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-import 'package:prescription_helper/screens/userProfileScreen.dart';
+import 'package:prescription_helper/screens/Home.dart';
+import 'package:prescription_helper/screens/adminHome.dart';
 import 'package:prescription_helper/utility/appColors.dart';
 import 'package:prescription_helper/utility/appDimens.dart';
 import 'package:prescription_helper/utility/utility.dart';
 
 import '../api_request/logincontroller.dart';
+import "../models/register_model.dart";
 
 class VerificationScreen extends StatefulWidget {
   String? countrycode;
@@ -31,6 +33,7 @@ class VerificationScreen extends StatefulWidget {
 }
 
 class _VerificationScreenPageState extends State<VerificationScreen> {
+  UserModel? userdetails;
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
   TextEditingController controller3 = TextEditingController();
@@ -138,11 +141,19 @@ class _VerificationScreenPageState extends State<VerificationScreen> {
         assert(user.uid == currentUser.uid);
 
         _showProgressDialog(false);
+
         if (user != null) {
-          userdata.write("isLoggedIn", "Yes");
-          await createUser(widget.username!, widget.mobile!, userdata.read("firebase_token"),widget.isAdmin!);
+          userdetails = await createUser(widget.username!, widget.mobile!,
+              userdata.read("firebase_token"), widget.isAdmin!);
           //print(user);
-          Get.to(UserProfileScreen(user: user));
+          userdata.write("isLoggedIn", "Yes");
+          if (userdetails?.isAdmin == "true") {
+            userdata.write("isAdmin", "true");
+            Get.to(AdminHome());
+          } else {
+            userdata.write("isAdmin", "false");
+            Get.to(Home());
+          }
         } else {
           Utility.showToast(msg: "Sign in failed");
         }
