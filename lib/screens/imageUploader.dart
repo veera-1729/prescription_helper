@@ -67,7 +67,7 @@ class _ImageUploaderState extends State<ImageUploader> {
     '1:00 PM',
     '8:00 PM',
   ];
-
+  var urli;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +83,7 @@ class _ImageUploaderState extends State<ImageUploader> {
               Image.file(_imageFile!),
               SizedBox(height: 20.0),
               ElevatedButton(
-                onPressed: _uploading ? null : _uploadImage,
+                onPressed: _uploading ? null : urli = _uploadImage,
                 child: _uploading
                     ? CircularProgressIndicator()
                     : Text('Upload Image'),
@@ -93,11 +93,18 @@ class _ImageUploaderState extends State<ImageUploader> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text('No image selected.'),
+                  urli == null
+                      ? Text('no image selected')
+                      : SizedBox(
+                        height: 250,
+                        width: 300,
+                          child: Image.network(imageUrl),
+                        ),
+                        SizedBox(height: 20,),
                   DropdownButtonHideUnderline(
                     child: DropdownButton2(
                       hint: Text(
-                        'Select Item',
+                        'Select Time',
                         style: TextStyle(
                           fontSize: 14,
                           color: Theme.of(context).hintColor,
@@ -129,6 +136,7 @@ class _ImageUploaderState extends State<ImageUploader> {
                       ),
                     ),
                   ),
+                  SizedBox(height: 20,),
                   Container(
                     height: 50,
                     width: 200,
@@ -150,6 +158,7 @@ class _ImageUploaderState extends State<ImageUploader> {
                       keyboardType: TextInputType.phone,
                     ),
                   ),
+                  SizedBox(height: 20,),
                   ElevatedButton(
                     onPressed: () {
                       setState(() {

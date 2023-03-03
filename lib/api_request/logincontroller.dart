@@ -17,7 +17,7 @@ Future<UserModel> createUser(String username, String phoneno, String firebase_to
   });
   print(body);
   final response =
-      await http.post(Uri.parse('http://192.168.43.60:8800/api/users/register'),
+      await http.post(Uri.parse('http://192.168.10.50:8800/api/users/register'),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },

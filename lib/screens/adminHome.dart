@@ -33,7 +33,7 @@ class _AdminHomeState extends State<AdminHome> {
                 });
                 Get.to(Navigation());
               },
-              child: Text("Sgin Out"),
+              child: Text("Sign Out"),
             ),
             ElevatedButton(
               onPressed: () {
@@ -44,6 +44,23 @@ class _AdminHomeState extends State<AdminHome> {
           ],
         ),
       ),
+     bottomNavigationBar: BottomNavigationBar(
+    items: const <BottomNavigationBarItem>[
+      BottomNavigationBarItem(
+        icon: Icon(Icons.home),
+        label: 'home',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.add),
+        label: 'add patient',
+        
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.settings_accessibility_outlined),
+        label: 'profile',
+      ),
+    ],
+  ),
     );
   }
 }
