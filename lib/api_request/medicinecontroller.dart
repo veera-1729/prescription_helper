@@ -5,17 +5,21 @@ import 'package:http/http.dart' as http;
 import 'package:prescription_helper/screens/Home.dart';
 import 'package:prescription_helper/screens/adminHome.dart';
 
-Future<String> addMedicine(String imageUrl, String time, String qty) async {
+Future<String> addMedicine(
+    String imageUrl, String time, String qty, String userId) async {
   print(imageUrl);
   print(time);
   print(qty);
-
-  var body = jsonEncode(
-      <String, String>{"imageUrl": imageUrl, "time": time, "qty": qty});
+  print(userId);
+  var body = jsonEncode(<String, String>{
+    "imageUrl": imageUrl,
+    "time": time,
+    "qty": qty,
+    "userId": userId
+  });
   print(body);
   final response = await http.post(
-      Uri.parse(
-          'http://192.168.10.50:8800/api/medicines/addMedicine/640091c42167faae006d4877'),
+      Uri.parse('http://192.168.10.39:8800/api/medicines/addMedicine/${userId}'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -25,7 +29,7 @@ Future<String> addMedicine(String imageUrl, String time, String qty) async {
     // then parse the JSON.
     print(response.body);
     print("201");
-    Get.to(AdminHome());
+    //Get.to(AdminHome());
     return "medicine data uploaded";
   } else if (response.statusCode == 200) {
     // If the server did return a 201 CREATED response,

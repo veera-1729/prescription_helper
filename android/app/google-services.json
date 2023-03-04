@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "150350566064-bkddpieauma6qvaamq6gbdnm6h07eas9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.prescription_helper",
+            "certificate_hash": "cf5f96a7818d7d0a7555f11f3046fdc58c638d66"
+          }
+        },
+        {
           "client_id": "150350566064-jk1pdi39d2ehu8gk0agpsqhsidik8j3l.apps.googleusercontent.com",
           "client_type": 3
         }

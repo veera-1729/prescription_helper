@@ -237,7 +237,9 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
           Expanded(
             child: TextFormField(
               style: TextStyle(
-                  fontSize: appDimens.text16, color: AppColors.greyText),
+                fontSize: appDimens.text16,
+                color: AppColors.greyText,
+              ),
               controller: usernamecontroller,
               decoration: InputDecoration(
                 hintText: "Username",

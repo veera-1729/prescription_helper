@@ -1,11 +1,19 @@
 import 'dart:io';
+
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
+
+import 'package:prescription_helper/api_request/admin_login_controller.dart';
 import 'package:prescription_helper/api_request/medicinecontroller.dart';
 
 class ImageUploader extends StatefulWidget {
+  PatientDetails? patientDetails;
+  ImageUploader( {
+    Key? key,
+     this.patientDetails,
+  }) : super(key: key);
   @override
   _ImageUploaderState createState() => _ImageUploaderState();
 }
@@ -15,9 +23,12 @@ class _ImageUploaderState extends State<ImageUploader> {
   bool _uploading = false;
   TextEditingController qtyController = TextEditingController();
   String? selectedTime;
-  var imageUrl =
-      "https://firebasestorage.googleapis.com/v0/b/prescriptionhelper-be566.appspot.com/o/images%2F1677589531103.jpg?alt=media&token=eacf746c-be4c-46ae-b16b-404baefa387e";
+  var imageUrl;
   var qty;
+  @override
+  void initState() {
+    super.initState();
+  }
 
   final picker = ImagePicker();
 
@@ -72,7 +83,7 @@ class _ImageUploaderState extends State<ImageUploader> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Image Uploader'),
+        title: Text('${widget.patientDetails!.username}'),
       ),
       body: Center(
         child: Column(
@@ -96,11 +107,13 @@ class _ImageUploaderState extends State<ImageUploader> {
                   urli == null
                       ? Text('no image selected')
                       : SizedBox(
-                        height: 250,
-                        width: 300,
+                          height: 250,
+                          width: 300,
                           child: Image.network(imageUrl),
                         ),
-                        SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   DropdownButtonHideUnderline(
                     child: DropdownButton2(
                       hint: Text(
@@ -136,7 +149,9 @@ class _ImageUploaderState extends State<ImageUploader> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   Container(
                     height: 50,
                     width: 200,
@@ -158,12 +173,14 @@ class _ImageUploaderState extends State<ImageUploader> {
                       keyboardType: TextInputType.phone,
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(
+                    height: 20,
+                  ),
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
                         qty = qtyController.text;
-                        addMedicine(imageUrl, selectedTime!, qty);
+                        addMedicine(imageUrl, selectedTime!, qty,widget.patientDetails!.id);
                       });
                     },
                     child: Text("Save"),

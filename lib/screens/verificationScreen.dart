@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:prescription_helper/api_request/admin_login_controller.dart';
 
 import 'package:prescription_helper/screens/Home.dart';
 import 'package:prescription_helper/screens/adminHome.dart';
@@ -14,6 +15,7 @@ import 'package:prescription_helper/utility/appDimens.dart';
 import 'package:prescription_helper/utility/utility.dart';
 
 import '../api_request/logincontroller.dart';
+import '../models/admin_model.dart';
 import "../models/register_model.dart";
 
 class VerificationScreen extends StatefulWidget {
@@ -34,6 +36,7 @@ class VerificationScreen extends StatefulWidget {
 
 class _VerificationScreenPageState extends State<VerificationScreen> {
   UserModel? userdetails;
+  AdminModel? adminDetails;
   TextEditingController controller1 = TextEditingController();
   TextEditingController controller2 = TextEditingController();
   TextEditingController controller3 = TextEditingController();
@@ -142,18 +145,24 @@ class _VerificationScreenPageState extends State<VerificationScreen> {
 
         _showProgressDialog(false);
 
-        if (user != null) {
+        if (user != null && !widget.isAdmin!) {
           userdetails = await createUser(widget.username!, widget.mobile!,
               userdata.read("firebase_token"), widget.isAdmin!);
           //print(user);
           userdata.write("isLoggedIn", "Yes");
-          if (userdetails?.isAdmin == "true") {
-            userdata.write("isAdmin", "true");
-            Get.to(AdminHome());
-          } else {
-            userdata.write("isAdmin", "false");
-            Get.to(Home());
-          }
+          userdata.write("userId",userdetails?.id);
+          userdata.write("isAdmin", "false");
+          Get.to(Home());
+        } else if (user != null && widget.isAdmin!) {
+          adminDetails = await createAdmin(
+            widget.username!,
+            widget.mobile!,
+            userdata.read("firebase_token"),
+          );
+          userdata.write("isLoggedIn", "Yes");
+          userdata.write("isAdmin", "true");
+          userdata.write("userId",adminDetails?.id);
+          Get.to(AdminHome());
         } else {
           Utility.showToast(msg: "Sign in failed");
         }
