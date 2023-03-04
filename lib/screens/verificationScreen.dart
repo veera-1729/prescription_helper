@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:prescription_helper/api_request/admin_login_controller.dart';
+import 'package:prescription_helper/homenav.dart';
 
 import 'package:prescription_helper/screens/Home.dart';
 import 'package:prescription_helper/screens/adminHome.dart';
@@ -150,7 +151,7 @@ class _VerificationScreenPageState extends State<VerificationScreen> {
               userdata.read("firebase_token"), widget.isAdmin!);
           //print(user);
           userdata.write("isLoggedIn", "Yes");
-          userdata.write("userId",userdetails?.id);
+          userdata.write("userId", userdetails?.id);
           userdata.write("isAdmin", "false");
           Get.to(Home());
         } else if (user != null && widget.isAdmin!) {
@@ -159,10 +160,11 @@ class _VerificationScreenPageState extends State<VerificationScreen> {
             widget.mobile!,
             userdata.read("firebase_token"),
           );
+          // userdata.write("username", widget.username);
           userdata.write("isLoggedIn", "Yes");
           userdata.write("isAdmin", "true");
-          userdata.write("userId",adminDetails?.id);
-          Get.to(AdminHome());
+          userdata.write("userId", adminDetails?.id);
+          Get.to(HomeNavigation(index: 0));
         } else {
           Utility.showToast(msg: "Sign in failed");
         }

@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:prescription_helper/homenav.dart';
 import 'package:prescription_helper/screens/Home.dart';
 import 'package:prescription_helper/screens/adminHome.dart';
 import 'package:prescription_helper/screens/loginWithPhone.dart';
@@ -31,7 +32,7 @@ class _NavigationState extends State<Navigation> {
       } else {
 
         if (userData.read("isAdmin") == "true")
-          Get.to(AdminHome());
+          Get.to(HomeNavigation(index: 0,));
         else if (userData.read("isAdmin") == "false") Get.to(Home());
       }
     });

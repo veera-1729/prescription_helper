@@ -83,7 +83,7 @@ class _ImageUploaderState extends State<ImageUploader> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.patientDetails!.username}'),
+        title: Text('${widget.patientDetails?.username}'),
       ),
       body: Center(
         child: Column(

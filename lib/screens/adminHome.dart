@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, non_constant_identifier_names, unnecessary_import, implementation_imports, unused_import
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
@@ -26,62 +28,70 @@ class _AdminHomeState extends State<AdminHome> {
       appBar: AppBar(
         title: Text("Admin Home"),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              width: 200,
-              child: TextField(
-                keyboardType: TextInputType.phone,
-                controller: phone_no_controller,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter Phone No',
+      body: Column(
+        children: [
+          Text(
+            "Hey ${userdata.read("username")},",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top:100.0),
+                child: Container(
+                  width: 350,
+                  child: TextField(
+                    keyboardType: TextInputType.phone,
+                    controller: phone_no_controller,
+                    decoration: InputDecoration(
+                      label: Text("enter patient phone no"),
+                      labelStyle: TextStyle(color: Colors.black),
+                      border: OutlineInputBorder(),
+                      // hintText: 'Enter Phone No',
+                    ),
+                  ),
                 ),
               ),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  userdata.erase();
-                });
-                Get.to(Navigation());
-              },
-              child: Text("Sign Out"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Get.to(ImageUploader(patientDetails: patientDetails));
-              },
-              child: Text("Add Patient"),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                patientDetails = await addPatient(
-                  phone_no_controller.text,
-                  userdata.read("userId"),
-                );
-              },
-              child: Text("Validate"),
-            )
-          ],
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: 'add patient',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings_accessibility_outlined),
-            label: 'profile',
+              Padding(
+                padding: const EdgeInsets.only(top: 30),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        // minimumSize: Size.infinite,
+                        textStyle: TextStyle(
+                          // backgroundColor: Colors.amber,
+                        )
+                      ),
+                      onPressed: () async {
+                        patientDetails = await addPatient(
+                          phone_no_controller.text,
+                          userdata.read("userId"),
+                        );
+                      },
+                      child: SizedBox(
+                        width: 150,
+                      height: 40,
+                        child: Center(child: Text("Validate patient"))),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Get.to(ImageUploader(patientDetails: patientDetails));
+                      },
+                      child: SizedBox(
+                        width: 150,
+                      height: 40,
+                        child: Center(child: Text("Add Patient"))),
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
         ],
       ),

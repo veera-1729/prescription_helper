@@ -19,7 +19,7 @@ Future<String> addMedicine(
   });
   print(body);
   final response = await http.post(
-      Uri.parse('http://192.168.10.39:8800/api/medicines/addMedicine/${userId}'),
+      Uri.parse('http://192.168.10.50:8800/api/medicines/addMedicine/${userId}'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },

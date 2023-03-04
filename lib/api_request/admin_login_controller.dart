@@ -19,7 +19,7 @@ Future<AdminModel> createAdmin(
   });
   print(body);
   final response = await http.post(
-    Uri.parse('http://192.168.10.39:8800/api/admin/register'),
+    Uri.parse('http://192.168.10.50:8800/api/admin/register'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
