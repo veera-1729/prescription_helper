@@ -19,7 +19,7 @@ Future<AdminModel> createAdmin(
   });
   print(body);
   final response = await http.post(
-    Uri.parse('http://192.168.10.50:8800/api/admin/register'),
+    Uri.parse('http://192.168.1.93:8800/api/admin/register'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -40,6 +40,7 @@ Future<AdminModel> createAdmin(
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
     print("Error occurred");
+    print(response.body);
     throw Exception('Failed to create album.');
   }
 }
@@ -50,7 +51,7 @@ Future<PatientDetails> addPatient(
   print(patientuserId);
   final response = await http.get(
     Uri.parse(
-        'http://192.168.10.39:8800/api/admin/add_patient/${adminphoneno}/${patientuserId}'),
+        'http://192.168.1.93:8800/api/admin/add_patient/${adminphoneno}/${patientuserId}'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -78,6 +79,10 @@ Future<PatientDetails> addPatient(
 //
 //     final patient = patientFromJson(jsonString);
 
+// To parse this JSON data, do
+//
+//     final patient = patientFromJson(jsonString);
+
 PatientDetails patientFromJson(String str) =>
     PatientDetails.fromJson(json.decode(str));
 
@@ -95,15 +100,15 @@ class PatientDetails {
   String id;
   String username;
   String phoneNo;
-  List<MedicineTiming> medicineTimings;
+  List<List<String>> medicineTimings;
   String isAdmin;
 
   factory PatientDetails.fromJson(Map<String, dynamic> json) => PatientDetails(
         id: json["_id"],
         username: json["username"],
         phoneNo: json["phone_no"],
-        medicineTimings: List<MedicineTiming>.from(
-            json["medicine_timings"].map((x) => MedicineTiming.fromJson(x))),
+        medicineTimings: List<List<String>>.from(json["medicine_timings"]
+            .map((x) => List<String>.from(x.map((x) => x)))),
         isAdmin: json["isAdmin"],
       );
 
@@ -111,44 +116,8 @@ class PatientDetails {
         "_id": id,
         "username": username,
         "phone_no": phoneNo,
-        "medicine_timings":
-            List<dynamic>.from(medicineTimings.map((x) => x.toJson())),
+        "medicine_timings": List<dynamic>.from(
+            medicineTimings.map((x) => List<dynamic>.from(x.map((x) => x)))),
         "isAdmin": isAdmin,
-      };
-}
-
-class MedicineTiming {
-  MedicineTiming({
-    required this.the9,
-  });
-
-  The9 the9;
-
-  factory MedicineTiming.fromJson(Map<String, dynamic> json) => MedicineTiming(
-        the9: The9.fromJson(json["9"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "9": the9.toJson(),
-      };
-}
-
-class The9 {
-  The9({
-    required this.img,
-    required this.qty,
-  });
-
-  String img;
-  int qty;
-
-  factory The9.fromJson(Map<String, dynamic> json) => The9(
-        img: json["img"],
-        qty: json["qty"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "img": img,
-        "qty": qty,
       };
 }

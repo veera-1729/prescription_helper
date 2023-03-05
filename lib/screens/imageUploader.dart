@@ -10,9 +10,9 @@ import 'package:prescription_helper/api_request/medicinecontroller.dart';
 
 class ImageUploader extends StatefulWidget {
   PatientDetails? patientDetails;
-  ImageUploader( {
+  ImageUploader({
     Key? key,
-     this.patientDetails,
+    this.patientDetails,
   }) : super(key: key);
   @override
   _ImageUploaderState createState() => _ImageUploaderState();
@@ -33,7 +33,7 @@ class _ImageUploaderState extends State<ImageUploader> {
   final picker = ImagePicker();
 
   Future<void> _getImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    final pickedFile = await picker.getImage(source: ImageSource.camera,imageQuality: 30);
 
     setState(() {
       _imageFile = File(pickedFile!.path);
@@ -180,7 +180,8 @@ class _ImageUploaderState extends State<ImageUploader> {
                     onPressed: () {
                       setState(() {
                         qty = qtyController.text;
-                        addMedicine(imageUrl, selectedTime!, qty,widget.patientDetails!.id);
+                        addMedicine(imageUrl, selectedTime!, qty,
+                            widget.patientDetails!.id);
                       });
                     },
                     child: Text("Save"),

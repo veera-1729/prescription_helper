@@ -17,13 +17,15 @@ Future<String> addMedicine(
     "qty": qty,
     "userId": userId
   });
-  print(body);
+
+  print('http://192.168.1.93:8800/api/medicines/addMedicine');
   final response = await http.post(
-      Uri.parse('http://192.168.10.50:8800/api/medicines/addMedicine/${userId}'),
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: body);
+    Uri.parse('http://192.168.1.93:8800/api/medicines/addMedicine'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: body,
+  );
   if (response.statusCode == 201) {
     // If the server did return a 201 CREATED response,
     // then parse the JSON.
@@ -41,7 +43,8 @@ Future<String> addMedicine(
   } else {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
-    print("Error occurred $response");
+    print("Error occurred");
+    print(response.body);
     throw Exception('Failed to create album.');
   }
 }
