@@ -2,11 +2,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:prescription_helper/homenav.dart';
+import 'package:prescription_helper/screens/loginWithPhone.dart';
 
 class Myprofile extends StatelessWidget {
-  const Myprofile({super.key});
+  Myprofile({super.key});
+  final getStorage = GetStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +22,14 @@ class Myprofile extends StatelessWidget {
             SizedBox(
               height: 5,
             ),
+            Center(
+              child: ElevatedButton(
+                  onPressed: () {
+                    getStorage.erase();
+                    Get.to(LoginWithPhone());
+                  },
+                  child: Text("Sign out")),
+            )
           ],
         ),
       ),
