@@ -22,13 +22,12 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     final getStorage = GetStorage();
-    // TODO: implement initState
     super.initState();
     Timer(Duration(seconds: 2), () {
       if (getStorage.read("userId") != null) {
         Get.to(GetStartedScreen());
       } else {
-        Get.to(LoginWithPhone());
+        Get.to(GetStartedScreen());
       }
     });
   }
@@ -40,12 +39,12 @@ class _SplashPageState extends State<SplashPage> {
           backgroundColor: Color.fromRGBO(217, 225, 232, 1),
           body: Column(children: [
             Padding(
-              padding: EdgeInsets.only(top: 350),
+              padding: EdgeInsets.only(top: 350.h),
               child: Text(
                 "Self Care",
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: 28,
+                    fontSize: 28.sp,
                     fontWeight: FontWeight.bold),
               ),
             ),
@@ -56,19 +55,19 @@ class _SplashPageState extends State<SplashPage> {
                   children: [
                     Image.asset(
                       "assets/leftlogo.png",
-                      width: 60,
-                      height: 60,
+                      width: 60.w,
+                      height: 60.h,
                     ),
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 80.0),
+                  padding: EdgeInsets.only(top: 80.h),
                   child: Row(
                     children: [
                       Image.asset(
                         "assets/rightlogo.png",
-                        width: 60,
-                        height: 60,
+                        width: 60.w,
+                        height: 60.h,
                       ),
                     ],
                   ),

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:prescription_helper/screens/checkuser.dart';
 
 class GetStartedScreen extends StatelessWidget {
   const GetStartedScreen({super.key});
@@ -21,28 +23,30 @@ class GetStartedScreen extends StatelessWidget {
                 "assets/image.png",
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 20.h),
             Center(
               child: Text(
                 "Manage your health and\n happy future",
                 style: TextStyle(
                     color: Color.fromRGBO(28, 31, 30, 1),
-                    fontSize: 28,
+                    fontSize: 28.sp,
                     fontWeight: FontWeight.w400),
               ),
             ),
             SizedBox(
-              height: 70,
+              height: 70.h,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.to(() => CheckAdminPage());
+              },
               child: Container(
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.blue,
                 ),
-                width: 240,
-                height: 45,
+                width: 240.w,
+                height: 45.h,
                 // color: Colors.blue,
                 alignment: Alignment.center,
                 child: Text("Get started"),
