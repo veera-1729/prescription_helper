@@ -17,7 +17,7 @@ Future<UserModel> createUser(String username, String phoneno,
   });
   print(body);
   final response = await http.post(
-    Uri.parse('http://192.168.1.93:8800/api/users/register'),
+    Uri.parse('http://192.168.43.60:8800/api/users/register'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },

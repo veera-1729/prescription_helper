@@ -19,7 +19,7 @@ Future<AdminModel> createAdmin(
   });
   print(body);
   final response = await http.post(
-    Uri.parse('http://192.168.1.93:8800/api/admin/register'),
+    Uri.parse('http://192.168.43.60:8800/api/admin/register'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -51,7 +51,7 @@ Future<PatientDetails> addPatient(
   print(patientuserId);
   final response = await http.get(
     Uri.parse(
-        'http://192.168.1.93:8800/api/admin/add_patient/${adminphoneno}/${patientuserId}'),
+        'http://192.168.43.60:8800/api/admin/add_patient/${adminphoneno}/${patientuserId}'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
