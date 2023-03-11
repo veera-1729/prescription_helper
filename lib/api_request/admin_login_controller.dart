@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:prescription_helper/models/admin_model.dart';
+import 'package:prescription_helper/screens/addMedicines.dart';
 import "../models/register_model.dart";
 import '../screens/imageUploader.dart';
 
@@ -19,7 +20,7 @@ Future<AdminModel> createAdmin(
   });
   print(body);
   final response = await http.post(
-    Uri.parse('http://192.168.43.60:8800/api/admin/register'),
+    Uri.parse('http://192.168.10.38:8800/api/admin/register'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -46,12 +47,12 @@ Future<AdminModel> createAdmin(
 }
 
 Future<PatientDetails> addPatient(
-    String adminphoneno, String patientuserId) async {
-  print(adminphoneno);
-  print(patientuserId);
+    String patientphoneno, String adminuserId) async {
+  print(adminuserId);
+  print(patientphoneno);
   final response = await http.get(
     Uri.parse(
-        'http://192.168.43.60:8800/api/admin/add_patient/${adminphoneno}/${patientuserId}'),
+        'http://192.168.10.38:8800/api/admin/add_patient/${patientphoneno}/${adminuserId}'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -60,7 +61,8 @@ Future<PatientDetails> addPatient(
   if (response.statusCode == 200) {
     print(response.body);
 
-    Get.to(ImageUploader(patientDetails: patientFromJson(response.body)));
+   // Get.to(ImageUploader(patientDetails: patientFromJson(response.body)));
+   // Get.to(AddMedicines(patientDetails: patientFromJson(response.body)));
 
     return patientFromJson(response.body);
   } else {
