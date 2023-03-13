@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, library_private_types_in_public_api, use_key_in_widget_constructors, avoid_print
 
+import 'dart:convert';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
+import 'package:prescription_helper/screens/Navigation.dart';
+import 'package:prescription_helper/screens/addMedicines.dart';
+import 'package:prescription_helper/screens/addPatient.dart';
+import 'package:prescription_helper/screens/notifications.dart';
 
 import 'package:prescription_helper/screens/splashscreen.dart';
 
@@ -26,15 +32,47 @@ void main() async {
     ),
   );
   final userdata = GetStorage();
+
   FirebaseMessaging.instance.getToken().then((value) {
     userdata.write("firebase_token", value);
     print("Get token $value");
   });
+
+  FirebaseMessaging.onMessageOpenedApp.listen(
+    (RemoteMessage message) async {
+      print("onMesaageOpenedApp:$message");
+      // Navigator.pushNamed(
+      //   navigatorKey.currentState!.context,
+      //   '/push-page',
+      //   arguments: {
+      //     "message":
+      //     json.encode(message.data),
+      //   },
+      // );
+      Get.to(() => Notificationpage(),
+          arguments: {"message": json.encode(message.data)});
+    },
+  );
+  FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
+    if (message != null) {
+      // Navigator.pushNamed(navigatorKey.currentState!.context, '/push-page',
+      //     arguments: {"message": json.encode(message.data)});
+      Get.to(() => Notificationpage(),
+          arguments: {"message": json.encode(message.data)});
+    }
+  });
+
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
     (_) {
       runApp(MyApp());
     },
   );
+}
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print("_firebaseMessagingBackgroundHandler: $message");
 }
 
 class MyApp extends StatefulWidget {
@@ -56,7 +94,9 @@ class _MyAppState extends State<MyApp> {
         minTextAdapt: true,
         builder: (context, child) => GetMaterialApp(
           debugShowCheckedModeBanner: false, //home: ImageUploader()
-          home: SplashPage(),
+          //home: SplashPage(),
+          //home: Navigation(),
+          home: AddMedicines(),
         ),
       ),
     );
