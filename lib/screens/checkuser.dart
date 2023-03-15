@@ -42,22 +42,22 @@ class _CheckAdminPageState extends State<CheckAdminPage> {
               ),
             ),
             SizedBox(height: 110.h),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  side: BorderSide(
-                      width: 2.w, color: ispatient ? Colors.amber : Colors.white),
-                  backgroundColor: Colors.white,
-                  elevation: ispatient ? 10 : 4,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20.r)))),
-              onPressed: () {
-                setState(() {
-                  ispatient = true;
-                });
-              },
-              child: SizedBox(
-                height: 120.h,
-                width: 340.w,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal:10.w),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(360.w, 120.w),
+                    side: BorderSide(
+                        width: 2.w, color: ispatient ? Colors.amber : Colors.white),
+                    backgroundColor: Colors.white,
+                    elevation: ispatient ? 10 : 4,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(20.r)))),
+                onPressed: () {
+                  setState(() {
+                    ispatient = true;
+                  });
+                },
                 child: Row(
                   children: <Widget>[
                     SizedBox(
@@ -84,6 +84,7 @@ class _CheckAdminPageState extends State<CheckAdminPage> {
               padding:EdgeInsets.symmetric(horizontal: 10.h),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
+                  minimumSize: Size(360.w, 120.h),
                     side: BorderSide(
                         width: 2.w,
                         color:
@@ -97,31 +98,27 @@ class _CheckAdminPageState extends State<CheckAdminPage> {
                     ispatient = false;
                   });
                 },
-                child: SizedBox(
-                  height: 120.h,
-                  width: 340.w,
-                  child: Row(
-                    children: <Widget>[
-                      SizedBox(
-                        width: 63.w,
-                        height: 63.h,
-                        child: Image.asset("assets/icon doctor.png"),
+                child: Row(
+                  children: <Widget>[
+                    SizedBox(
+                      width: 63.w,
+                      height: 63.h,
+                      child: Image.asset("assets/icon doctor.png"),
+                    ),
+                    SizedBox(width: 10.w),
+                    Text(
+                      'I am a Doctor',
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        color: Colors.black,
                       ),
-                      SizedBox(width: 10.w),
-                      Text(
-                        'I am a Doctor',
-                        style: TextStyle(
-                          fontSize: 20.sp,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
             SizedBox(
-              height: 160.h,
+              height: 145.h,
             ),
             Elevatedbutton(),
           ],
@@ -143,18 +140,16 @@ class Elevatedbutton extends StatelessWidget {
           ispatient ? Get.to(() => LoginWithPhone()) : Get.to(()=>Admindetails());
         },
         style: ElevatedButton.styleFrom(
+          maximumSize: Size(200.w, 50.h),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20.r)))),
-        child: Container(
-            width: 204.w,
-            height: 49.h,
-            child: Center(
-                child: Text(
-              "continue",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24.sp,
-                  fontWeight: FontWeight.w500),
-            ))));
+        child: Center(
+            child: Text(
+          "continue",
+          style: TextStyle(
+              color: Colors.white,
+              fontSize: 24.sp,
+              fontWeight: FontWeight.w400),
+        )));
   }
 }
