@@ -70,25 +70,25 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
                     SizedBox(
                       height: appDimens.paddingw20,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Checkbox(
-                          value: isAdmin,
-                          onChanged: (value) {
-                            setState(() {
-                              isAdmin = value!;
-                              //userData.write("isAdmin", isAdmin);
-                              print(isAdmin);
-                            });
-                          },
-                        ),
-                        Text(
-                          "Login as Admin",
-                          style: TextStyle(fontWeight: FontWeight.w900),
-                        )
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                    //     Checkbox(
+                    //       value: isAdmin,
+                    //       onChanged: (value) {
+                    //         setState(() {
+                    //           isAdmin = value!;
+                    //           //userData.write("isAdmin", isAdmin);
+                    //           print(isAdmin);
+                    //         });
+                    //       },
+                    //     ),
+                    //     Text(
+                    //       "Login as Admin",
+                    //       style: TextStyle(fontWeight: FontWeight.w900),
+                    //     )
+                    //   ],
+                    // ),
                     SizedBox(
                       height: 20,
                     ),
