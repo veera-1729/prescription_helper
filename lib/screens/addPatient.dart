@@ -111,7 +111,7 @@ class _AddPatientState extends State<AddPatient> {
                 onTap: () async {
                   patientDetails = await addPatient(
                       phoneController.text, getStorage.read("userId"));
-                  // Get.to(() => AddMedicines());
+                  Get.to(() => AddMedicines(patientDetails: patientDetails!));
                 },
               )
 

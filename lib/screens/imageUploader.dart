@@ -178,11 +178,12 @@ class _ImageUploaderState extends State<ImageUploader> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      setState(() {
-                        qty = qtyController.text;
-                        addMedicine(imageUrl, selectedTime!, qty,
-                            widget.patientDetails!.id);
-                      });
+                      // setState(() {
+                      //   qty = qtyController.text;
+                      //   addMedicine(imageUrl, selectedTime!, qty,
+                      //       widget.patientDetails!.id);
+                      // }
+                      // );
                     },
                     child: Text("Save"),
                   )

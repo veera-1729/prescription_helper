@@ -73,7 +73,7 @@ Future<PatientDetails> addPatient(
         snackPosition: SnackPosition.BOTTOM,
         backgroundColor: Colors.black,
         colorText: Colors.white);
-    throw Exception('Failed to create album.');
+    throw Exception('Failed to add patient.');
   }
 }
 

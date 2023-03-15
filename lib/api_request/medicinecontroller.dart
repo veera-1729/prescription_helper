@@ -1,24 +1,49 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+
 import 'package:prescription_helper/screens/Home.dart';
 import 'package:prescription_helper/screens/adminHome.dart';
 
-Future<String> addMedicine(
-    String imageUrl, String time, String qty, String userId) async {
-  print(imageUrl);
-  print(time);
+class Medicine {
+//Medicine({this.name, this.personalId});
+
+  String qty;
+  String userId;
+  List<dynamic> imageUrls;
+  List<dynamic> timings;
+  Medicine({
+    required this.qty,
+    required this.userId,
+    required this.imageUrls,
+    required this.timings,
+  });
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'imageurls': imageUrls,
+        'timings': timings,
+        'qty': qty,
+        'userId': userId
+      };
+}
+
+Future<bool> addMedicine(List<dynamic> imageUrls, List<dynamic> timings,
+    String qty, String userId) async {
+  print(imageUrls);
+  print(timings);
   print(qty);
   print(userId);
-  var body = jsonEncode(<String, String>{
-    "imageUrl": imageUrl,
-    "time": time,
-    "qty": qty,
-    "userId": userId
-  });
+  // var body = jsonEncode(<String, dynamic>{
+  //   "imageUrl": imageUrl,
+  //   "time": time,
+  //   "qty": qty,
+  //   "userId": userId
+  // });
+  var body = jsonEncode(
+      Medicine(qty: qty, userId: userId, imageUrls: imageUrls, timings: timings)
+          .toJson());
 
-  print('http://169.254.74.82:8800/api/medicines/addMedicine');
   final response = await http.post(
     Uri.parse('http://192.168.10.38:8800/api/medicines/addMedicine'),
     headers: <String, String>{
@@ -31,20 +56,18 @@ Future<String> addMedicine(
     // then parse the JSON.
     print(response.body);
     print("201");
+
     //Get.to(AdminHome());
-    return "medicine data uploaded";
-  } else if (response.statusCode == 200) {
-    // If the server did return a 201 CREATED response,
-    // then parse the JSON.
-    print("$response");
-    print("200");
-    return "medicine data uploaded";
-    ;
+    return true;
   } else {
     // If the server did not return a 201 CREATED response,
     // then throw an exception.
     print("Error occurred");
     print(response.body);
-    throw Exception('Failed to create album.');
+    throw Exception('Failed to add Medicne.');
+    Get.snackbar("Error", "${response.body}",
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black,
+        colorText: Colors.white);
   }
 }
