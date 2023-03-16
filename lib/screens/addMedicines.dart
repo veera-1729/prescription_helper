@@ -233,7 +233,7 @@ class _AddMedicinesState extends State<AddMedicines> {
                     onChanged: (value) {
                       setState(() {
                         dosage = 1.toString();
-                        _dosage = value;
+                        _dosage = value as Dosage?;
                       });
                       print(value); //selected value
                     },
@@ -252,7 +252,7 @@ class _AddMedicinesState extends State<AddMedicines> {
                     onChanged: (value) {
                       setState(() {
                         dosage = 2.toString();
-                        _dosage = value;
+                        _dosage = value as Dosage?;
                       });
                       print(value); //selected value
                     },
@@ -271,7 +271,7 @@ class _AddMedicinesState extends State<AddMedicines> {
                     onChanged: (value) {
                       setState(() {
                         dosage = 3.toString();
-                        _dosage = value;
+                        _dosage = value as Dosage?;
                       });
                       print(value); //selected value
                     },
