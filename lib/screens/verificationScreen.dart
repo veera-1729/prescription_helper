@@ -11,12 +11,14 @@ import 'package:prescription_helper/homenav.dart';
 
 import 'package:prescription_helper/screens/Home.dart';
 import 'package:prescription_helper/screens/adminHome.dart';
+import 'package:prescription_helper/screens/admindetails.dart';
 import 'package:prescription_helper/utility/appColors.dart';
 import 'package:prescription_helper/utility/appDimens.dart';
 import 'package:prescription_helper/utility/utility.dart';
 
 import '../api_request/logincontroller.dart';
 import '../models/admin_model.dart';
+import '../models/admin_model_register.dart';
 import "../models/register_model.dart";
 
 class VerificationScreen extends StatefulWidget {
@@ -153,7 +155,7 @@ class _VerificationScreenPageState extends State<VerificationScreen> {
           userdata.write("isLoggedIn", "Yes");
           userdata.write("userId", userdetails?.id);
           userdata.write("isAdmin", "false");
-          Get.to(Home());
+          Get.to(UserHome());
         } else if (user != null && widget.isAdmin!) {
           adminDetails = await createAdmin(
             widget.username!,
@@ -164,7 +166,20 @@ class _VerificationScreenPageState extends State<VerificationScreen> {
           userdata.write("isLoggedIn", "Yes");
           userdata.write("isAdmin", "true");
           userdata.write("userId", adminDetails?.id);
-          Get.to(HomeNavigation(index: 0));
+          userdata.write("username", adminDetails?.username);
+          print("Login route completed");
+          var isExisting = await isAdminExists(userdata.read('userId'));
+          print(isExisting);
+          if (isExisting == true) {
+            userdata.write("hospitalName", adminDetails?.hospitalName);
+            userdata.write("location", adminDetails?.location);
+            // Get.to(AdminHome());
+            print("Admin details are present redirecting to main page");
+            Get.offAll(HomeNavigation(index: 0) , arguments: adminDetails);
+          } else {
+            print("No admin details so redirecting to admin detials page");
+            Get.offAll(Admindetails());
+          }
         } else {
           Utility.showToast(msg: "Sign in failed");
         }

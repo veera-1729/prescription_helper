@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:prescription_helper/screens/checkuser.dart';
+import 'package:prescription_helper/screens/signin.dart';
 
 class GetStartedScreen extends StatelessWidget {
   const GetStartedScreen({super.key});
@@ -38,7 +39,7 @@ class GetStartedScreen extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Get.to(() => CheckAdminPage());
+                Get.to(() => SignInPage());
               },
               child: Container(
                 decoration: BoxDecoration(

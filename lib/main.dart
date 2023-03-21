@@ -14,8 +14,10 @@ import 'package:prescription_helper/screens/Navigation.dart';
 import 'package:prescription_helper/screens/addMedicines.dart';
 import 'package:prescription_helper/screens/addPatient.dart';
 import 'package:prescription_helper/screens/notifications.dart';
+import 'package:prescription_helper/screens/patientsList.dart';
 
 import 'package:prescription_helper/screens/splashscreen.dart';
+import 'package:prescription_helper/widgets/Patient_list_widget.dart';
 
 void main() async {
   await GetStorage.init();
@@ -94,9 +96,10 @@ class _MyAppState extends State<MyApp> {
         minTextAdapt: true,
         builder: (context, child) => GetMaterialApp(
           debugShowCheckedModeBanner: false, //home: ImageUploader()
-          //home: SplashPage(),
-          //home: Navigation(),
-          home: AddMedicines(),
+          //home: PatientsList(),
+         //home: Navigation(),
+          //home: AddMedicines(),
+          home: SplashPage(),
         ),
       ),
     );

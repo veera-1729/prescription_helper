@@ -34,6 +34,7 @@ class _HomeNavigationState extends State<HomeNavigation>
     }
     routing();
   }
+  var adminDetails = Get.arguments;
 
   int currentTab = 0;
   bool isChecked = false;

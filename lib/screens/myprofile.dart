@@ -7,6 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:prescription_helper/homenav.dart';
 import 'package:prescription_helper/screens/loginWithPhone.dart';
+import 'package:prescription_helper/screens/splashscreen.dart';
 
 class Myprofile extends StatelessWidget {
   Myprofile({super.key});
@@ -26,7 +27,7 @@ class Myprofile extends StatelessWidget {
               child: ElevatedButton(
                   onPressed: () {
                     getStorage.erase();
-                    Get.to(LoginWithPhone());
+                    Get.to(SplashPage());
                   },
                   child: Text("Sign out")),
             )
