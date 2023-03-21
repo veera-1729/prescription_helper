@@ -148,7 +148,7 @@ class _VerificationScreenPageState extends State<VerificationScreen> {
 
         _showProgressDialog(false);
 
-        if (user != null && !widget.isAdmin!) {
+        if (user != null && !widget.isAdmin!)  {
           userdetails = await createUser(widget.username!, widget.mobile!,
               userdata.read("firebase_token"), widget.isAdmin!);
           //print(user);
@@ -162,7 +162,6 @@ class _VerificationScreenPageState extends State<VerificationScreen> {
             widget.mobile!,
             userdata.read("firebase_token"),
           );
-          // userdata.write("username", widget.username);
           userdata.write("isLoggedIn", "Yes");
           userdata.write("isAdmin", "true");
           userdata.write("userId", adminDetails?.id);
@@ -173,7 +172,6 @@ class _VerificationScreenPageState extends State<VerificationScreen> {
           if (isExisting == true) {
             userdata.write("hospitalName", adminDetails?.hospitalName);
             userdata.write("location", adminDetails?.location);
-            // Get.to(AdminHome());
             print("Admin details are present redirecting to main page");
             Get.offAll(HomeNavigation(index: 0) , arguments: adminDetails);
           } else {

@@ -66,9 +66,9 @@ class _AdminHomeState extends State<AdminHome> {
                 Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 100.0),
+                      padding: EdgeInsets.only(top: 100.h),
                       child: Container(
-                        width: 350,
+                        width: 350.w,
                         child: TextField(
                           keyboardType: TextInputType.phone,
                           controller: phone_no_controller,
@@ -82,7 +82,7 @@ class _AdminHomeState extends State<AdminHome> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 30),
+                      padding: EdgeInsets.only(top: 30.h),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -99,8 +99,8 @@ class _AdminHomeState extends State<AdminHome> {
                               );
                             },
                             child: SizedBox(
-                                width: 150,
-                                height: 40,
+                                width: 135.w,
+                                height: 40.h,
                                 child: Center(child: Text("Validate patient"))),
                           ),
                           ElevatedButton(
@@ -109,8 +109,8 @@ class _AdminHomeState extends State<AdminHome> {
                                   patientDetails: patientDetails));
                             },
                             child: SizedBox(
-                                width: 150,
-                                height: 40,
+                                width: 135.w,
+                                height: 40.h,
                                 child: Center(child: Text("Add Patient"))),
                           ),
                         ],

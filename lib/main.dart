@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 import 'package:prescription_helper/screens/Navigation.dart';
 import 'package:prescription_helper/screens/addMedicines.dart';
 import 'package:prescription_helper/screens/addPatient.dart';
+import 'package:prescription_helper/screens/adminHome.dart';
 import 'package:prescription_helper/screens/notifications.dart';
 import 'package:prescription_helper/screens/patientsList.dart';
 
@@ -99,7 +100,7 @@ class _MyAppState extends State<MyApp> {
           //home: PatientsList(),
          //home: Navigation(),
           //home: AddMedicines(),
-          home: SplashPage(),
+          home: Notificationpage(),
         ),
       ),
     );
