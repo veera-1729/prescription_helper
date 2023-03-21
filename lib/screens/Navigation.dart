@@ -33,7 +33,7 @@ class _NavigationState extends State<Navigation> {
 
         if (userData.read("isAdmin") == "true")
           Get.to(HomeNavigation(index: 0,));
-        else if (userData.read("isAdmin") == "false") Get.to(Home());
+        else if (userData.read("isAdmin") == "false") Get.to(UserHome());
       }
     });
   }

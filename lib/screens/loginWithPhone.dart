@@ -70,25 +70,25 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
                     SizedBox(
                       height: appDimens.paddingw20,
                     ),
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
-                    //     Checkbox(
-                    //       value: isAdmin,
-                    //       onChanged: (value) {
-                    //         setState(() {
-                    //           isAdmin = value!;
-                    //           //userData.write("isAdmin", isAdmin);
-                    //           print(isAdmin);
-                    //         });
-                    //       },
-                    //     ),
-                    //     Text(
-                    //       "Login as Admin",
-                    //       style: TextStyle(fontWeight: FontWeight.w900),
-                    //     )
-                    //   ],
-                    // ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Checkbox(
+                          value: isAdmin,
+                          onChanged: (value) {
+                            setState(() {
+                              isAdmin = value!;
+                              //userData.write("isAdmin", isAdmin);
+                              print(isAdmin);
+                            });
+                          },
+                        ),
+                        Text(
+                          "Login as Admin",
+                          style: TextStyle(fontWeight: FontWeight.w900),
+                        )
+                      ],
+                    ),
                     SizedBox(
                       height: 20,
                     ),
@@ -186,7 +186,7 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
               textInputAction: TextInputAction.done,
               keyboardType: TextInputType.phone,
             ),
-          )
+          ),
         ],
       ),
     );
@@ -260,10 +260,13 @@ class _LoginWithPhoneState extends State<LoginWithPhone> {
     FocusScope.of(context).requestFocus(new FocusNode());
     userData.write("username", usernamecontroller.text.trim());
 
-    Get.to(VerificationScreen(
+    Get.to(
+      VerificationScreen(
         mobile: textEditingController.text,
         username: usernamecontroller.text.trim(),
         countrycode: "+91",
-        isAdmin: isAdmin));
+        isAdmin: isAdmin,
+      ),
+    );
   }
 }

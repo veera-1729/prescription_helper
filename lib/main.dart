@@ -96,9 +96,10 @@ class _MyAppState extends State<MyApp> {
         minTextAdapt: true,
         builder: (context, child) => GetMaterialApp(
           debugShowCheckedModeBanner: false, //home: ImageUploader()
-          home: PatientsList(),
-         // home: Navigation(),
+          //home: PatientsList(),
+         //home: Navigation(),
           //home: AddMedicines(),
+          home: SplashPage(),
         ),
       ),
     );

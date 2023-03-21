@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,12 +7,11 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-
 import 'package:prescription_helper/api_request/admin_login_controller.dart';
 import 'package:prescription_helper/api_request/medicinecontroller.dart';
 
 class AddMedicines extends StatefulWidget {
-  PatientDetails patientDetails;
+  PatientDetails? patientDetails;
   AddMedicines({
     Key? key,
     required this.patientDetails,
@@ -41,7 +39,7 @@ class _AddMedicinesState extends State<AddMedicines> {
 
   final picker = ImagePicker();
   var urli;
-
+  bool isUploading  = false;
   void initState() {
     super.initState();
   }
@@ -92,7 +90,7 @@ class _AddMedicinesState extends State<AddMedicines> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Color.fromRGBO(217, 225, 232, 1),
-        body: Padding(
+        body: isUploading ?  Center(child: CircularProgressIndicator()) : Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(children: [
             SizedBox(height: 20.h),
@@ -130,7 +128,7 @@ class _AddMedicinesState extends State<AddMedicines> {
                 //   ),
                 // ),
                 Text(
-                  "Hey ${widget.patientDetails.username}",
+                  "Hey ${widget.patientDetails?.username}",
                   style: TextStyle(
                     fontSize: 25.sp,
                     fontWeight: FontWeight.w700,
@@ -482,8 +480,14 @@ class _AddMedicinesState extends State<AddMedicines> {
                             backgroundColor: Colors.redAccent,
                             colorText: Colors.white);
                       } else {
+                        setState(() {
+                          isUploading = true;
+                        });
                         res = await addMedicine(imageUrls, timings,
-                            dosage.toString(), widget.patientDetails.id);
+                            dosage.toString(), widget.patientDetails!.id);
+                        setState(() {
+                          isUploading = false;
+                        });
                       }
                       if (res) {
                         setState(() {

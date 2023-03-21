@@ -8,6 +8,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:prescription_helper/homenav.dart';
 import 'package:prescription_helper/screens/loginWithPhone.dart';
 import 'package:prescription_helper/screens/startingscreen.dart';
 
@@ -25,7 +26,7 @@ class _SplashPageState extends State<SplashPage> {
     super.initState();
     Timer(Duration(seconds: 2), () {
       if (getStorage.read("userId") != null) {
-        Get.to(GetStartedScreen());
+        Get.to(() => HomeNavigation(index: 0));
       } else {
         Get.to(GetStartedScreen());
       }

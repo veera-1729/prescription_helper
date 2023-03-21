@@ -45,7 +45,7 @@ Future<bool> addMedicine(List<dynamic> imageUrls, List<dynamic> timings,
           .toJson());
 
   final response = await http.post(
-    Uri.parse('http://192.168.10.38:8800/api/medicines/addMedicine'),
+    Uri.parse('http://192.168.43.60:8800/api/medicines/addMedicine'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
